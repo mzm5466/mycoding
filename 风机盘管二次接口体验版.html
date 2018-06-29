@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    <title>java Test</title>
+</head>
+<style type="text/css">
+    <!--
+    body, div {
+        margin: 0;
+        padding: 0;
+    }
+
+    -->
+</style>
+<script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.js"></script>
+
+<body>
+<!--<div id="id" style="background:#ccc;height:300px;" onclick=""></div>-->
+<!--<div style="position:relative;">-->
+<!--<div style=" position:absolute;left:50px; top:50px;" id="DivID"></div>-->
+<!--</div>-->
+<div id="test"></div>
+
+<script type="text/javascript">
+    $(function () {
+    $('body').append("<img id='imgId' src='http://ali.cloudepc.epcifm.com/pg/status?v="+Date.parse(new Date())+"'/>");
+        $("#imgId").click(function (e) {
+
+            var offset = $(this).offset();
+            var relativeX = (e.pageX - offset.left);
+            var relativeY = (e.pageY - offset.top);
+            alert(relativeX+"__"+relativeY)
+            var data = {
+                'pointX': relativeX,
+                'pointY': relativeY
+            }
+            $.ajax({
+                type: 'GET',
+                url: 'http://ali.cloudepc.epcifm.com/pg/write',
+                data: data,
+                dataType: 'json',//希望服务器返回json格式的数据
+                success: function (data) {
+                    window.location.reload();
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
